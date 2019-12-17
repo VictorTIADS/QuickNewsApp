@@ -11,7 +11,8 @@ interface InterfaceRequest {
     fun getNews(
         @Path("endpoint")endPoint:String = "top-headlines",
         @Query("q")search:String = "",
-        @Query("language")language:String = "",
+        @Query("language")language:String = "pt",
+        @Query("pageSize")pageSize:String = "30",
         @Query("category")category:String = "",
         @Query("country")country:String = "br",
         @Query("apiKey")apiKey:String = "5d984c7e027e4edfa5ad7c8e1a323959"

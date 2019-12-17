@@ -1,14 +1,12 @@
 package com.vtools.quicknews.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
+import androidx.appcompat.widget.SearchView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vtools.quicknews.R
 import com.vtools.quicknews.adapter.PageAdapter
-import com.vtools.quicknews.animation.Animate
 import com.vtools.quicknews.animation.HideToLeft
 import com.vtools.quicknews.animation.ShowFromLeftToRight
 import com.vtools.quicknews.view.fragments.HomeFragment
@@ -18,7 +16,6 @@ import com.vtools.quicknews.viewmodel.activities.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_search_layout.*
-import org.jetbrains.anko.design.tabItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModel()
     lateinit var mViewPager: ViewPager
     lateinit var mBottomNavigationLayout: BottomNavigationView
+    private val fragmentHome by lazy { HomeFragment.newInstance() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +34,24 @@ class MainActivity : AppCompatActivity() {
         setupViewPager(mViewPager)
         pagerChangeListener()
         bottomNavigationChangeLister()
+
+        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                fragmentHome.searchQuery(query)
+                return false
+            }
+        })
     }
 
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = PageAdapter(supportFragmentManager)
-        adapter.addFragment(HomeFragment.newInstance(), "Home")
+        adapter.addFragment(fragmentHome, "Home")
         adapter.addFragment(MenuFragment.newInstance(), "Menu")
         adapter.addFragment(ProfileFragment.newInstance(), "Profile")
         viewPager.adapter = adapter
@@ -119,5 +129,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    interface listenerSearchBar{
+        fun searchQuery(query:String)
+    }
 
 }
