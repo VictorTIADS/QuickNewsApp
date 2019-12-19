@@ -7,19 +7,19 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vtools.quicknews.R
+import com.vtools.quicknews.`interface`.InterfaceSearchBar
 import com.vtools.quicknews.adapter.NewsAdapter
 import com.vtools.quicknews.animation.FadeIn
 import com.vtools.quicknews.animation.FadeOut
 import com.vtools.quicknews.model.BaseModel
 import com.vtools.quicknews.model.Request
-import com.vtools.quicknews.view.activities.MainActivity
 import com.vtools.quicknews.viewmodel.fragments.HomeViewModel
 import kotlinx.android.synthetic.main.content_recycler_view.*
 import kotlinx.android.synthetic.main.list_news_hint.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment(), MainActivity.listenerSearchBar {
+class HomeFragment : Fragment(), InterfaceSearchBar {
 
     private val viewModel : HomeViewModel by viewModel()
     lateinit var mAdapter: NewsAdapter
@@ -28,7 +28,7 @@ class HomeFragment : Fragment(), MainActivity.listenerSearchBar {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getNews()
 
-        mAdapter = NewsAdapter(requireContext(), Request("", 0, arrayListOf()))
+        mAdapter = NewsAdapter(requireContext(), Request(null, 0, arrayListOf()))
         recycler_view.adapter = mAdapter
         recycler_view.layoutManager = LinearLayoutManager(requireContext())
         setObservable()

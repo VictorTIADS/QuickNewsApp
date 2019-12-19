@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var mViewPager: ViewPager
     lateinit var mBottomNavigationLayout: BottomNavigationView
     private val fragmentHome by lazy { HomeFragment.newInstance() }
-
+    private val fragmentMenu by lazy { MenuFragment.newInstance() }
+    private val fragmentProfile by lazy { ProfileFragment.newInstance()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,17 @@ class MainActivity : AppCompatActivity() {
         setupViewPager(mViewPager)
         pagerChangeListener()
         bottomNavigationChangeLister()
+        searchViewListener()
+    }
 
+    private fun setupViewPager(viewPager: ViewPager) {
+        val adapter = PageAdapter(supportFragmentManager)
+        adapter.addFragment(fragmentHome, "Home")
+        adapter.addFragment(fragmentMenu, "Menu")
+        adapter.addFragment(fragmentProfile, "Profile")
+        viewPager.adapter = adapter
+    }
+    private fun searchViewListener(){
         search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
@@ -46,15 +57,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-    }
-
-
-    private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = PageAdapter(supportFragmentManager)
-        adapter.addFragment(fragmentHome, "Home")
-        adapter.addFragment(MenuFragment.newInstance(), "Menu")
-        adapter.addFragment(ProfileFragment.newInstance(), "Profile")
-        viewPager.adapter = adapter
     }
 
     private fun bottomNavigationChangeLister() {
@@ -127,10 +129,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    interface listenerSearchBar{
-        fun searchQuery(query:String)
     }
 
 }
