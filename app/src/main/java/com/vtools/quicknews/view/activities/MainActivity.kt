@@ -2,6 +2,7 @@ package com.vtools.quicknews.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vtools.quicknews.R
@@ -22,25 +23,46 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModel()
     lateinit var mViewPager: ViewPager
     lateinit var mBottomNavigationLayout: BottomNavigationView
-
+    private val fragmentHome by lazy { HomeFragment.newInstance() }
+    private val fragmentMenu by lazy { MenuFragment.newInstance() }
+    private val fragmentProfile by lazy { ProfileFragment.newInstance()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mViewPager = main_view_pager
-        mBottomNavigationLayout = bottom_navigation
+        initViewPager()
+        initBottomNavigation()
         setupViewPager(mViewPager)
         pagerChangeListener()
         bottomNavigationChangeLister()
+        searchViewListener()
     }
-
+    private fun initViewPager(){
+        mViewPager = main_view_pager
+    }
+    private fun initBottomNavigation(){
+        mBottomNavigationLayout = bottom_navigation
+    }
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = PageAdapter(supportFragmentManager)
-        adapter.addFragment(HomeFragment.newInstance(), "Home")
-        adapter.addFragment(MenuFragment.newInstance(), "Menu")
-        adapter.addFragment(ProfileFragment.newInstance(), "Profile")
+        adapter.addFragment(fragmentHome, "Home")
+        adapter.addFragment(fragmentMenu, "Menu")
+        adapter.addFragment(fragmentProfile, "Profile")
         viewPager.adapter = adapter
+    }
+    private fun searchViewListener(){
+        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                fragmentHome.searchQuery(query)
+                return false
+            }
+        })
     }
 
     private fun bottomNavigationChangeLister() {
@@ -114,7 +136,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
-
 }

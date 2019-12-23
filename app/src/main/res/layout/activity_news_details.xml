@@ -27,9 +27,10 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/backgraund_gradient"/>
+                android:background="@drawable/backgraund_gradient" />
 
             <include layout="@layout/toolbar_layout" />
+
         </FrameLayout>
 
 
