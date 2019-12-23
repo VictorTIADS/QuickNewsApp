@@ -20,4 +20,12 @@ class HomeViewModel(val service:ServiceRequestRepository) : ViewModel() {
         })
     }
 
+    fun getNewsSearch(query:String){
+        dataNews.value = BaseModel(null, BaseModel.Companion.STATUS.LOADING,null)
+        service.getNewsWithSearchFromApi(query,{
+            dataNews.value = BaseModel(it, BaseModel.Companion.STATUS.SUCCESS,null)
+        },{
+            dataNews.value = BaseModel(null, BaseModel.Companion.STATUS.ERROR,it)
+        })
+    }
 }
