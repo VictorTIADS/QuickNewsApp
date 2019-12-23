@@ -30,12 +30,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mViewPager = main_view_pager
-        mBottomNavigationLayout = bottom_navigation
+        initViewPager()
+        initBottomNavigation()
         setupViewPager(mViewPager)
         pagerChangeListener()
         bottomNavigationChangeLister()
         searchViewListener()
+    }
+    private fun initViewPager(){
+        mViewPager = main_view_pager
+    }
+    private fun initBottomNavigation(){
+        mBottomNavigationLayout = bottom_navigation
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
@@ -130,5 +136,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 }

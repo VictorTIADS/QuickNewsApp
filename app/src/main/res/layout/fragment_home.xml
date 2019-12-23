@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.HomeFragment">
 
-    <include layout="@layout/list_news_hint"/>
+    <include layout="@layout/list_news_hint" />
+
     <include layout="@layout/content_recycler_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

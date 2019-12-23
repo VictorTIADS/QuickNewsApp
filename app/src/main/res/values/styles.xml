@@ -6,4 +6,12 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:fontFamily">@font/karla_regular</item>
     </style>
+
+    <style name="AppThemeDetail" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorGreenLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorGreenLight</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:fontFamily">@font/karla_regular</item>
+    </style>
 </resources>

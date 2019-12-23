@@ -1,5 +1,8 @@
 package com.vtools.quicknews.view.fragments
 
+
+import android.content.Intent
+
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -7,34 +10,45 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vtools.quicknews.R
+import com.vtools.quicknews.`interface`.InterfaceRecyclerView
 import com.vtools.quicknews.`interface`.InterfaceSearchBar
 import com.vtools.quicknews.adapter.NewsAdapter
 import com.vtools.quicknews.animation.FadeIn
 import com.vtools.quicknews.animation.FadeOut
+import com.vtools.quicknews.model.Article
 import com.vtools.quicknews.model.BaseModel
 import com.vtools.quicknews.model.Request
+import com.vtools.quicknews.view.activities.NewsDetailsActivity
 import com.vtools.quicknews.viewmodel.fragments.HomeViewModel
 import kotlinx.android.synthetic.main.content_recycler_view.*
 import kotlinx.android.synthetic.main.list_news_hint.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment(), InterfaceSearchBar {
+class HomeFragment : Fragment(), InterfaceRecyclerView, InterfaceSearchBar {
 
-    private val viewModel : HomeViewModel by viewModel()
-    lateinit var mAdapter: NewsAdapter
+
+    private val viewModel: HomeViewModel by viewModel()
+    private lateinit var mAdapter: NewsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getNews()
 
-        mAdapter = NewsAdapter(requireContext(), Request(null, 0, arrayListOf()))
-        recycler_view.adapter = mAdapter
-        recycler_view.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.getNews()
+        initAdapter()
         setObservable()
     }
+    private fun initAdapter(){
+        mAdapter = NewsAdapter(requireContext(), Request("", 0, arrayListOf()), this)
+        recycler_view.adapter = mAdapter
+        recycler_view.layoutManager = LinearLayoutManager(requireContext())
+    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -44,7 +58,6 @@ class HomeFragment : Fragment(), InterfaceSearchBar {
                 BaseModel.Companion.STATUS.SUCCESS -> {
                     it.data?.let { it1 -> configureNewsAdapter(it1) }
                     controlViewState(BaseModel.Companion.STATUS.SUCCESS)
-
                 }
                 BaseModel.Companion.STATUS.ERROR -> {
 
@@ -71,17 +84,21 @@ class HomeFragment : Fragment(), InterfaceSearchBar {
             ?.replace(R.id.main_content_principal, fragment)?.commit()
     }
 
-
     private fun configureNewsAdapter(request: Request) {
-        mAdapter = NewsAdapter(requireContext(), request)
+        mAdapter = NewsAdapter(requireContext(), request, this)
         recycler_view.adapter = mAdapter
         recycler_view.layoutManager = LinearLayoutManager(requireContext())
         mAdapter.notifyDataSetChanged()
     }
 
-
     companion object {
         fun newInstance() = HomeFragment()
+    }
+
+    override fun onItemNewsClick(article: Article) {
+        val intentNewsDetail = Intent(requireContext(), NewsDetailsActivity::class.java)
+        intentNewsDetail.putExtra("article", article)
+        startActivity(intentNewsDetail)
     }
 
     override fun searchQuery(query: String) {

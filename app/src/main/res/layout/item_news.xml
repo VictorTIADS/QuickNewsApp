@@ -29,8 +29,6 @@
         </View>
     </FrameLayout>
 
-
-
     <TextView
         android:id="@+id/item_list_title"
         android:layout_width="match_parent"

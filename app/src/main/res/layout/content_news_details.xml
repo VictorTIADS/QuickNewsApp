@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/detail_source_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/new_font"
+        android:text="Canada"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/detail_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/new_font"
+        android:text="16 October 2019"
+        app:layout_constraintStart_toEndOf="@+id/detail_source_name"
+        app:layout_constraintTop_toTopOf="@+id/detail_source_name" />
+
+    <TextView
+        android:id="@+id/detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/new_font"
+        android:text="How not to spend 5 days in the Canadian Rokies"
+        android:textColor="@color/colorBlack"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_source_name" />
+
+    <TextView
+        android:id="@+id/detail_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="I suppose it depends on the type of restaurant you choose. My husband and I would go to Subway for lunch and split a foot long sub and have chips and drinks from the grocery store. Our hotels had free breakfast so that was a perk. We might splurge on dinner and sometimes we'd have leftovers from the night before, We typically allot $100 per day and don't come anywhere close to spending that much. That would include food and activities."
+        app:layout_constraintEnd_toEndOf="@+id/detail_title"
+        app:layout_constraintStart_toStartOf="@+id/detail_title"
+        app:layout_constraintTop_toBottomOf="@+id/detail_title" />
+
+    <TextView
+        android:id="@+id/detail_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="I suppose it depends on the type of restaurant you choose. My husband and I would go to Subway for lunch and split a foot long sub and have chips and drinks from the grocery store. Our hotels had free breakfast so that was a perk. We might splurge on dinner and sometimes we'd have leftovers from the night before, We typically allot $100 per day and don't come anywhere close to spending that much. That would include food and activities."
+        app:layout_constraintEnd_toEndOf="@+id/detail_description"
+        app:layout_constraintStart_toStartOf="@+id/detail_description"
+        app:layout_constraintTop_toBottomOf="@+id/detail_description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
