@@ -30,6 +30,6 @@ fun View.ShowFromLeftToRight() {
     }
 }
 
-fun View.Animate() {
-    YoYo.with(Techniques.Bounce).duration(500).playOn(this)
+fun View.PulseView() {
+    YoYo.with(Techniques.Pulse).duration(400).playOn(this)
 }

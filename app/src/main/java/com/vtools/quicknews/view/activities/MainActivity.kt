@@ -1,14 +1,11 @@
 package com.vtools.quicknews.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vtools.quicknews.R
 import com.vtools.quicknews.adapter.PageAdapter
-import com.vtools.quicknews.animation.Animate
 import com.vtools.quicknews.animation.HideToLeft
 import com.vtools.quicknews.animation.ShowFromLeftToRight
 import com.vtools.quicknews.view.fragments.HomeFragment
@@ -18,7 +15,6 @@ import com.vtools.quicknews.viewmodel.activities.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_search_layout.*
-import org.jetbrains.anko.design.tabItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -118,6 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 
 }
