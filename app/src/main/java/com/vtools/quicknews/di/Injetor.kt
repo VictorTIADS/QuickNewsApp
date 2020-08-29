@@ -10,7 +10,7 @@ fun Application.koinInjector(){
         androidLogger()
         androidContext(this@koinInjector)
         modules(
-            arrayListOf(
+            listOf(
                 viewmodel,
                 network
             )

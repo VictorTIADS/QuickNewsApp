@@ -99,6 +99,8 @@ class HomeFragment : Fragment(), InterfaceRecyclerView, InterfaceSearchBar {
         val intentNewsDetail = Intent(requireContext(), NewsDetailsActivity::class.java)
         intentNewsDetail.putExtra("article", article)
         startActivity(intentNewsDetail)
+//        fragmentManager?.beginTransaction()?.replace(R.id.detail_content_description,DetailFragment())?.commit()
+
     }
 
     override fun searchQuery(query: String) {

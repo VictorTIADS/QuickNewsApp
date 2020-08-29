@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vtools.quicknews.R
 import com.vtools.quicknews.adapter.PageAdapter
+import com.vtools.quicknews.animation.FadeIn
 import com.vtools.quicknews.animation.HideToLeft
 import com.vtools.quicknews.animation.ShowFromLeftToRight
 import com.vtools.quicknews.view.fragments.HomeFragment
@@ -14,7 +15,9 @@ import com.vtools.quicknews.view.fragments.MenuFragment
 import com.vtools.quicknews.view.fragments.ProfileFragment
 import com.vtools.quicknews.viewmodel.activities.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_recycler_view.*
 import kotlinx.android.synthetic.main.navigation_drawer_layout.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.android.synthetic.main.toolbar_search_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         pagerChangeListener()
         bottomNavigationChangeLister()
         searchViewListener()
+
+
     }
     private fun initViewPager(){
         mViewPager = main_view_pager
@@ -70,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.item_menu_home -> {
+                    recycler_view.smoothScrollToPosition(0)
                     if (!it.isChecked) {
                         mViewPager.currentItem = 0
                         controlSeachbarView(0)
@@ -128,10 +134,10 @@ class MainActivity : AppCompatActivity() {
     private fun controlSeachbarView(position: Int) {
         when (position) {
             0 -> {
-                seach_bar.ShowFromLeftToRight()
+                tool_bar.ShowFromLeftToRight()
             }
             else -> {
-                seach_bar.HideToLeft()
+                tool_bar.HideToLeft()
             }
         }
 

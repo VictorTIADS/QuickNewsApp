@@ -12,6 +12,7 @@
         android:id="@+id/main_content_searchbar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        app:layout_constraintBottom_toTopOf="@id/main_view_pager"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
